@@ -52,28 +52,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Envio do formulário (simulado)
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    retorno.textContent = 'Enviando...';
-    retorno.className = '';
+ // Envio do formulário (com delays)
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  retorno.textContent = 'Enviando...';
+  retorno.className = '';
 
-    // Simula envio com delay
-    setTimeout(() => {
-      const nome = form.nome.value.trim();
-      const email = form.email.value.trim();
-      const mensagem = form.mensagem.value.trim();
+  const nome = form.nome.value.trim();
+  const email = form.email.value.trim();
+  const telefone = form.telefone.value.trim();
+  const mensagem = form.mensagem.value.trim();
 
-      if (nome && email && mensagem) {
-        retorno.textContent = 'Mensagem enviada com sucesso! Entraremos em contato em breve.';
-        retorno.className = 'sucesso';
-        form.reset();
-      } else {
-        retorno.textContent = 'Por favor, preencha todos os campos obrigatórios.';
-        retorno.className = 'erro';
-      }
-    }, 1000);
-  });
+  if (!nome || !email || !mensagem) {
+    retorno.textContent = 'Por favor, preencha todos os campos obrigatórios.';
+    retorno.className = 'erro';
+    return;
+  }
+
+  try {
+    // Delay antes de enviar (simula processamento local)
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    const response = await fetch('http://localhost:3000/contato', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, email, telefone, mensagem })
+    });
+
+    if (!response.ok) throw new Error('Erro na requisição');
+
+    // Delay após receber resposta (simula processamento do servidor)
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    const data = await response.json();
+    retorno.textContent = data.message || 'Mensagem enviada com sucesso! Entraremos em contato em breve.';
+    retorno.className = 'sucesso';
+    form.reset();
+  } catch (error) {
+    console.error('Erro ao enviar formulário:', error);
+    retorno.textContent = 'Erro ao enviar mensagem. Tente novamente mais tarde.';
+    retorno.className = 'erro';
+  }
+});
 
   console.log("Página 'Contato' carregada com sucesso.");
 });
