@@ -1,0 +1,125 @@
+/* Responsividade */
+@media (max-width: 1024px) {
+    .hero-content h1 {
+        font-size: 2.4rem;
+    }
+    
+    .about-section .container {
+        flex-direction: column;
+    }
+    
+    .about-image {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header .container {
+        padding: 0.8rem 1.5rem;
+    }
+    
+    .main-nav {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 80%;
+        height: calc(100vh - 80px);
+        background-color: var(--white);
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        z-index: 999;
+    }
+    
+    .main-nav.active {
+        left: 0;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+        padding: 2rem;
+    }
+    
+    .main-nav li {
+        margin: 0 0 1.5rem 0;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .hero .container {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 4rem;
+    }
+    
+    .hero-content {
+        padding-right: 0;
+        margin-bottom: 3rem;
+    }
+    
+    .hero .btn {
+        margin-right: 0.5rem;
+        margin-left: 0.5rem;
+    }
+    
+    .newsletter .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .newsletter-form {
+        margin-top: 1.5rem;
+        max-width: 100%;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .testimonials-slider {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .newsletter-form input {
+        border-radius: 4px;
+        margin-bottom: 0.5rem;
+    }
+    
+    .newsletter-form button {
+        border-radius: 4px;
+        width: 100%;
+    }
+}
