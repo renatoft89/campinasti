@@ -53,7 +53,7 @@ app.post('/contato', (req, res) => {
       return res.status(500).json({ error: 'Erro ao salvar dados' });
     }
 
-    res.json({ message: 'Mensagem salva com sucesso!', id: result.insertId });
+    res.json({ message: 'Mensagem enviada com sucesso!', id: result.insertId });
   });
 });
 
