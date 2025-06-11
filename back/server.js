@@ -28,6 +28,11 @@ db.connect(err => {
   console.log('Conectado ao MySQL');
 });
 
+// Rota para verificar se a API está funcionando
+app.get('/', (req, res) => {
+  res.send('API está funcionando corretamente!');
+});
+
 // Rota para salvar dados do formulário
 app.post('/contato', (req, res) => {
   const { nome, email, telefone, mensagem } = req.body;
