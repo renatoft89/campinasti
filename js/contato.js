@@ -73,7 +73,7 @@ form.addEventListener('submit', async (e) => {
     // Delay antes de enviar (simula processamento local)
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    const response = await fetch('http://localhost:3000/contato', {
+    const response = await fetch('https://campinasti-back.onrender.com:3000/contato', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nome, email, telefone, mensagem })
