@@ -12,20 +12,25 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Conexão com o MySQL
-const db = mysql.createConnection({
+// Pool de conexões com o MySQL
+const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+  database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-db.connect(err => {
+// Testa a conexão ao iniciar
+db.getConnection((err, connection) => {
   if (err) {
     console.error('Erro ao conectar no banco:', err);
     process.exit(1);
   } 
   console.log('Conectado ao MySQL');
+  connection.release(); // libera a conexão de volta para o pool
 });
 
 // Rota para verificar se a API está funcionando
